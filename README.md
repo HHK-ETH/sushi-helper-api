@@ -2,7 +2,7 @@
 
 ### Infos
 
-Supply is updated every hour, it consist of sushi total supply minus : 
+Supply is updated every hour, it's equal to sushi total supply minus : 
 
 TREASURY = '0xe94B5EEC1fA96CEecbD33EF5Baa8d00E4493F4f3';
 SUSHI_HOUSE = '0x7b18913D945242A9c313573E6c99064cd940c6aF';
