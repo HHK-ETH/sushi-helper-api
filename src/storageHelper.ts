@@ -8,7 +8,7 @@ export default class StorageHelper {
   private constructor() {
     fs.access('./src/storage.json', fs.constants.R_OK, (err) => {
       if (!err) return;
-      const storage: any = { supply: BigNumber.from(0) };
+      const storage: any = { cirulating: '0', total: '0' };
       fs.writeFile('./src/storage.json', JSON.stringify(storage), (err) => {
         if (!err) return;
         console.log(err);
@@ -24,12 +24,12 @@ export default class StorageHelper {
     return StorageHelper.instance;
   }
 
-  public async read(): Promise<{ supply: BigNumber }> {
-    const rewarders = await fsPromise.readFile('./src/storage.json', 'utf-8');
-    return JSON.parse(rewarders);
+  public async read(): Promise<{ cirulating: string; total: string }> {
+    const supply = await fsPromise.readFile('./src/storage.json', 'utf-8');
+    return JSON.parse(supply);
   }
 
-  public async write(supply: BigNumber): Promise<void> {
-    await fsPromise.writeFile('./src/storage.json', JSON.stringify({ supply: supply }));
+  public async write(supply: { circulating: string; total: string }): Promise<void> {
+    await fsPromise.writeFile('./src/storage.json', JSON.stringify(supply));
   }
 }
