@@ -14,4 +14,4 @@ Supply is updated every hour, it's equal to sushi total supply minus :
 
 https://supply.sushibackup.com/
 
-returns {supply: string}
+returns {circulating: string, total: string}
