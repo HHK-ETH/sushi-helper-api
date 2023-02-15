@@ -3,7 +3,7 @@ import { getTotalSupply, parseMenuByChain } from './src';
 import rateLimit from 'express-rate-limit';
 
 const app = express();
-const port = 3334;
+const port = 3335;
 
 const limiter = rateLimit({
   windowMs: 120_000, // 2 minutes
