@@ -1,8 +1,8 @@
 {
-  "name": "sushi-supply-api",
-  "version": "1.0.0",
+  "name": "sushi-helper-api",
+  "version": "2.0.0",
   "main": "index.ts",
-  "repository": "git@github.com:HHK-ETH/sushi-supply-api.git",
+  "repository": "git@github.com:HHK-ETH/sushi-helper-api.git",
   "author": "HHK <hhk.contact@protonmail.com>",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
+    "@sushiswap/default-token-list": "^40.1.0",
     "ethers": "^5.7.2",
     "express": "^4.18.2",
     "express-rate-limit": "^6.7.0",

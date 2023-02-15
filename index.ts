@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTotalSupply, StorageHelper } from './src';
+import { getTotalSupply, parseMenuByChain } from './src';
 import rateLimit from 'express-rate-limit';
 
 const app = express();
@@ -7,24 +7,32 @@ const port = 3334;
 
 const limiter = rateLimit({
   windowMs: 120_000, // 2 minutes
-  max: 10, // Limit each IP to 10 requests per `window` (here, per 10 minutes)
+  max: 10, // Limit each IP to 10 requests per `window`
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 app.use(limiter);
 
-const storageHelper = StorageHelper.getInstance();
+const MENU = parseMenuByChain();
 
+let memorySupply = {
+  circulating: '0',
+  total: '0',
+};
 getTotalSupply().then(async (supply) => {
-  await storageHelper.write(supply);
+  memorySupply = supply;
   setInterval(async () => {
-    await storageHelper.write(await getTotalSupply());
+    memorySupply = await getTotalSupply();
+    console.log('Supply at ' + Date.now() + ' : ' + memorySupply);
   }, 3600_000); //every 1 hour
 });
 
-app.get('/', async (req, res) => {
-  const supply = await storageHelper.read();
-  res.json(supply);
+app.get('/supply', async (req, res) => {
+  res.json(memorySupply);
+});
+
+app.get('/tokens', async (req, res) => {
+  res.json(MENU);
 });
 
 app.listen(port, () => {

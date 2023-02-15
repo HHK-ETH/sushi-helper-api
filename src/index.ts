@@ -1,4 +1,4 @@
-import StorageHelper from './storageHelper';
 import { getTotalSupply } from './web3';
+import { parseMenuByChain } from './menu';
 
-export { StorageHelper, getTotalSupply };
+export { getTotalSupply, parseMenuByChain };
