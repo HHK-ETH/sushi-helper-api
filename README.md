@@ -1,4 +1,6 @@
-# Sushi supply API
+# Sushi helper API
+
+## Supply
 
 ### Infos
 
@@ -12,6 +14,18 @@ Supply is updated every hour, it's equal to sushi total supply minus :
 
 ### Query
 
-https://supply.sushibackup.com/
+https://helper.sushibackup.com/supply
 
 returns {circulating: string, total: string}
+
+## Tokens/Menu
+
+### Infos
+
+This query returns the Sushi token list from @sushiswap/default-token-list parsed by chain and addresses
+
+### Query
+
+https://helper.sushibackup.com/tokens
+
+returns Record<chainId: string[]>
