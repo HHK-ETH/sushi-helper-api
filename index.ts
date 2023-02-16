@@ -7,7 +7,7 @@ const port = 3335;
 
 const limiter = rateLimit({
   windowMs: 120_000, // 2 minutes
-  max: 10, // Limit each IP to 10 requests per `window`
+  max: 50, // Limit each IP to 10 requests per `window`
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
