@@ -1,4 +1,4 @@
 import { getTotalSupply } from './web3';
-import { parseMenuByChain } from './menu';
+import { getAllTokensByChain } from './menu';
 
-export { getTotalSupply, parseMenuByChain };
+export { getTotalSupply, getAllTokensByChain };
