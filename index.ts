@@ -40,8 +40,8 @@ app.get('/supply', async (req, res) => {
   res.json(memorySupply);
 });
 
-app.get('/tokens', async (req, res) => {
-  res.json(memoryMenu);
+app.get('/tokens/:id', async (req, res) => {
+  res.json(memoryMenu[req.params.id] ? memoryMenu[req.params.id] : []);
 });
 
 app.listen(port, () => {
