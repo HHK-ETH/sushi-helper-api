@@ -1,5 +1,6 @@
 import menu from '@sushiswap/default-token-list';
 import axios from 'axios';
+import { ONE_INCH_TOKENS } from '../imports';
 
 const SUSHI_TOKEN_API = 'https://tokens.sushi.com/v0/';
 const ONEINCH_TOKEN_API = 'https://tokens.1inch.io/v1.1/';
@@ -17,7 +18,7 @@ function parseMenuByChain(): Record<string, string[]> {
   return parsedMenu;
 }
 
-async function queryAndParseSushiAPi(chains: string[]): Promise<Record<string, string[]>> {
+async function queryAndParseSushiApi(chains: string[]): Promise<Record<string, string[]>> {
   let parsedList: Record<string, string[]> = { '1': [] };
   await Promise.all(
     chains.map(async (chain) => {
@@ -38,7 +39,7 @@ async function queryAndParseSushiAPi(chains: string[]): Promise<Record<string, s
   return parsedList;
 }
 
-async function queryAndParseOneInchAPi(chains: string[]): Promise<Record<string, string[]>> {
+async function queryAndParseOneInchApi(chains: string[]): Promise<Record<string, string[]>> {
   let parsedList: Record<string, string[]> = { '1': [] };
   await Promise.all(
     chains.map(async (chain) => {
@@ -64,13 +65,12 @@ export async function getAllTokensByChain(): Promise<Record<string, string[]>> {
   const chains = Object.keys(base);
 
   //get sushi token list and add it
-  const sushiTokens = await queryAndParseSushiAPi(chains);
+  const sushiTokens = await queryAndParseSushiApi(chains);
   for (const [chain, tokens] of Object.entries(sushiTokens)) {
     base[chain] = base[chain].concat(...tokens);
   }
-  //get oneInch token lsit and add it
-  const oneInchTokens = await queryAndParseOneInchAPi(chains);
-  for (const [chain, tokens] of Object.entries(oneInchTokens)) {
+  //get oneInch token list and add it, use local json instead of API as they block datacenter requests
+  for (const [chain, tokens] of Object.entries(ONE_INCH_TOKENS)) {
     base[chain] = base[chain].concat(...tokens);
   }
 
